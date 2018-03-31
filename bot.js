@@ -27,27 +27,77 @@ bot.on("ready", async () => {
 });
 
 bot.on("message", async message => {
+    
     if(message.author.bot) return;
     if(message.channel.type === "dm") return;
 
     let messageArray = message.content.split(" ");
     let command = messageArray[0];
-    //let args = args.splice(1);
+    
+    console.log(`${messageArray[0]}|${messageArray[1]}`);
     
     if(!command.startsWith(prefix)) return;
-    //console.log(`Command is ${command}`);
+
+    console.log(`Checking for user info`);
+    
     if(command === `${prefix}userinfo`) {
+        
+        console.log("In user info");
+        
         let embed = new Discord.RichEmbed()
             .setAuthor(message.author.username)
-            .setDescription("This is the user's info");
+            .setDescription("This is the user's info")
+            .setColor("#9B59B6")
+            .addField("Full Username", `${message.author.username}#${message.author.discriminator}`)
+            .addField("Created Date", `${message.author.createdAt}`)
 
         message.channel.send(embed);
+        return;
     };
-    //console.log("About to check ping");
+    
+    console.log("About to check ping");
+    
     if(command === `${prefix}ping` || command === `${prefix}Ping`) {
-        //console.log("Found ping");
+        console.log("Found ping");
         message.channel.send("Pong!");
-    } return;
+
+        return;
+    };
+    
+    console.log("Checking weather");
+    
+    if(command === `${prefix}weather`) {
+        
+        console.log("Checking zip");
+        
+        let zipCode = messageArray[1];
+        
+        console.log(`Zip is ${zipCode}`);
+        
+        var request = require("request");
+
+        var options = { method: 'GET',
+          url: 'http://api.openweathermap.org/data/2.5/weather',
+          qs: 
+           { zip: `${zipCode},us`,
+             appid: 'c9b9747a481872999cf199acc6bec4ff',
+             units: 'imperial' }
+            }
+
+        console.log("Making request");
+
+        request(options, function (error, response, body) {
+          if (error) throw new Error(error);
+
+          console.log(body);
+
+          let jsonResponse = JSON.parse(body);
+
+          message.channel.send(`The weather is currently ${jsonResponse.main.temp} degrees in ${jsonResponse.name}.`);
+        })    
+
+    return;
+    };
 
 });
 
