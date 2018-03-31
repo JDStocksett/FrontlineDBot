@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 //const logger = require('winston');
-const auth = require("./auth.json");
+const botSettings = require("./settings.json");
 const prefix = auth.prefix;
 
 const bot = new Discord.Client({disableEveryone: true});
@@ -35,14 +35,19 @@ bot.on("message", async message => {
     //let args = args.splice(1);
     
     if(!command.startsWith(prefix)) return;
-
+    console.log(`Command is ${command}`);
     if(command === `${prefix}userinfo`) {
         let embed = new Discord.RichEmbed()
             .setAuthor(message.author.username)
             .setDescription("This is the user's info");
 
         message.channel.send(embed);
-    }
+    };
+    console.log("About to check ping");
+    if(command === `${prefix}ping` || command === `${prefix}Ping`) {
+        console.log("Found ping");
+        message.channel.send("Pong!");
+    } return;
 
 });
 
