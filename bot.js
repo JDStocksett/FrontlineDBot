@@ -48,7 +48,7 @@ bot.on("message", async message => {
         //console.log("Found ping");
         message.channel.send("Pong!");
     } return;
-//test
+
 });
 
 bot.login(botSettings.token);
