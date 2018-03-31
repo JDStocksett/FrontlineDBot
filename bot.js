@@ -33,7 +33,7 @@ bot.on("message", async message => {
     let messageArray = message.content.split(" ");
     let command = messageArray[0];
     //let args = args.splice(1);
-    
+
     if(!command.startsWith(prefix)) return;
     //console.log(`Command is ${command}`);
     if(command === `${prefix}userinfo`) {
@@ -44,11 +44,11 @@ bot.on("message", async message => {
         message.channel.send(embed);
     };
     //console.log("About to check ping");
-    if(command === `${prefix}ping` || command === `${prefix}Ping`) {
+    if(command.toLower() === `${prefix}ping`) {
         //console.log("Found ping");
         message.channel.send("Pong!");
     } return;
-
+//test
 });
 
 bot.login(botSettings.token);
@@ -80,7 +80,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
     if (message.substring(0, 1) == '!') {
         var args = message.substring(1).split(' ');
         var cmd = args[0];
-       
+
         args = args.splice(1);
         switch(cmd) {
             // !ping
