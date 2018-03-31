@@ -51,7 +51,7 @@ bot.on("message", async message => {
 
 });
 
-bot.login(auth.token);
+bot.login(botSettings.token);
 
 
 
