@@ -1,0 +1,13 @@
+{
+  "name": "FS Test Bot!",
+  "version": "1.0.0",
+  "description": "My own Discord bot",
+  "main": "bot.js",
+  "author": "JD",
+  "dependencies": {
+    //"discord.io": "^2.5.3",
+    "discord.js": "^11.3.2",
+    "npm": "^5.8.0",
+    //"winston": "^2.4.1"
+  }
+}
